@@ -1,58 +1,85 @@
-# prophet-challenge
-Instructions
-Step 1: Find Unusual Patterns in Hourly Google Search Traffic
-The data science manager asks if the Google search traffic for the company links to any financial events at the company. Or, does the search traffic data just present random noise? To answer this question, pick out any unusual patterns in the Google search data for the company, and connect them to the corporate financial events.
+# README: Google Search Traffic Analysis
 
-To do so, complete the following steps:
+## Overview
+This project aims to analyze Google search traffic data for MercadoLibre to identify unusual patterns, seasonal trends, and correlations with stock price movements. Additionally, a time series forecasting model is developed to predict future search traffic trends.
 
-Read the search data into a DataFrame, and then slice the data to just the month of May 2020. (During this month, MercadoLibre released its quarterly financial results.) Visualize the results. Do any unusual patterns exist?
+## Objectives
+1. **Identify Unusual Patterns:** Explore the search traffic data for anomalies, particularly around May 2020 when MercadoLibre released its quarterly financial results.
+2. **Seasonality Analysis:** Determine seasonal patterns in the search data to guide marketing efforts.
+3. **Stock Price Correlation:** Examine the relationship between search traffic and stock price movements.
+4. **Time Series Forecasting:** Develop a Prophet-based model to forecast search traffic.
 
-Calculate the total search traffic for the month, and then compare the value to the monthly median across all months.
+---
 
-Did the Google search traffic increase during the month that MercadoLibre released its financial results? Write your answer in the space provided in the starter file.
+## Prerequisites
+To run this analysis, you need:
+- Python 3.8 or above
+- Libraries: `pandas`, `matplotlib`, `fbprophet` (or `prophet`), `numpy`
+- Google search data and stock price data in CSV format
 
-Step 2: Mine the Search Traffic Data for Seasonality
-Marketing realizes that they can use the hourly search data, too. If they can track and predict interest in the company and its platform for any time of day, they can focus their marketing efforts around the times that have the most traffic. This will get a greater return on investment (ROI) from their marketing budget.
+---
 
-To that end, you want to mine the search traffic data for predictable seasonal patterns of interest in the company. To do so, complete the following steps:
+## Project Steps
 
-Group the hourly search data to plot the average traffic by the hour of day. Does the search traffic peak at a particular time of day or is it relatively consistent?
+### Step 1: Find Unusual Patterns
+1. Load the search traffic data.
+2. Slice the data to the month of May 2020.
+3. Visualize hourly search traffic for May 2020.
+4. Compare total search traffic for May 2020 to the median monthly traffic.
 
-Group the hourly search data to plot the average traffic by the day of the week (for example, Monday vs. Friday). Does the search traffic get busiest on any particular day of the week?
+### Step 2: Analyze Seasonality
+1. Group and analyze search traffic by:
+   - **Hour of the day**
+   - **Day of the week**
+   - **Week of the year**
+2. Visualize trends to identify peaks and patterns.
 
-Group the hourly search data to plot the average traffic by the week of the year. Does the search traffic tend to increase during the winter holiday period (weeks 40 through 52)?
+### Step 3: Relate Search Traffic to Stock Price
+1. Load stock price data and merge it with the search traffic data.
+2. Add derived metrics:
+   - Lagged search traffic
+   - Stock volatility (4-hour EWMA)
+   - Hourly stock returns
+3. Visualize trends to identify correlations.
 
-Are there any time based trends that you can see in the data? Write your answer in the space provided in the starter file.
+### Step 4: Time Series Forecasting
+1. Prepare the search traffic data for the Prophet model.
+2. Fit the model and generate forecasts for the next 7 days.
+3. Visualize the forecast and time series components to analyze patterns.
 
-Step 3: Relate the Search Traffic to Stock Price Patterns
-You mention your work on the search traffic data during a meeting with people in the finance group at the company. They want to know if any relationship between the search data and the company stock price exists, and they ask if you can investigate.
+---
 
-To do so, complete the following steps:
+## Files
+1. **google_search_data.csv:** Contains hourly Google search traffic data.
+2. **stock_price_data.csv:** Contains hourly stock price data for MercadoLibre.
+3. **analysis_script.py:** Python script for the entire analysis.
+4. **README.md:** Documentation for the project.
 
-Read in and plot the stock price data. Concatenate the stock price data to the search data in a single DataFrame.
+---
 
-Market events emerged during the year of 2020 that many companies found difficult. But, after the initial shock to global financial markets, new customers and revenue increased for e-commerce platforms. Slice the data to just the first half of 2020 (2020-01 to 2020-06 in the DataFrame), and then plot the data. Do both time series indicate a common trend that’s consistent with this narrative?
+## Usage
+1. Clone the repository and place the required CSV files in the project directory.
+2. Install the required Python libraries:
+   ```bash
+   pip install pandas matplotlib fbprophet
+   ```
+3. Run the analysis script:
+   ```bash
+   python analysis_script.py
+   ```
 
-Create a new column in the DataFrame named “Lagged Search Trends” that offsets, or shifts, the search traffic by one hour. Create two additional columns:
+---
 
-“Stock Volatility”, which holds an exponentially weighted four-hour rolling average of the company’s stock volatility
+## Results
+1. **Unusual Patterns:** Insights into how search traffic changes around significant financial events.
+2. **Seasonality:** Identification of peak hours, days, and weeks for search traffic.
+3. **Stock Price Correlation:** Evidence of relationships between search trends and stock price movements.
+4. **Forecasting:** Predictions for future search traffic to support decision-making.
 
-“Hourly Stock Return”, which holds the percent change of the company's stock price on an hourly basis
+---
 
-Does a predictable relationship exist between the lagged search traffic and the stock volatility or between the lagged search traffic and the stock price returns? Write your answer in the space provided in the starter file.
+## Authors
+ESHUMAEL MANHANZVA
+eshumaelm@yahoo.co.uk
 
-Step 4: Create a Time Series Model with Prophet
-Now, you need to produce a time series model that analyzes and forecasts patterns in the hourly search data. To do so, complete the following steps:
-
-Set up the Google search data for a Prophet forecasting model.
-
-After estimating the model, plot the forecast. How's the near-term forecast for the popularity of MercadoLibre?
-
-Plot the individual time series components of the model to answer the following questions in the space provided in the starter file:
-
-What time of day exhibits the greatest popularity?
-
-Which day of the week gets the most search traffic?
-
-What's the lowest point for search traffic in the calendar year?
 
